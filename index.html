@@ -1,0 +1,103 @@
+<html>
+  <head>
+    <style>
+      #mod-container {
+        display: none;
+      }
+      #video-container {
+        width: 50%;
+        height: 50%;
+        position: absolute;
+        top: 0;
+        left: 25%;
+      }
+      video {
+        width: 100%;
+        position: absolute;
+        top: 0;
+        left: 0;
+      }
+      video:nth-child(1) {
+        opacity: 0.5;
+      }
+      video:nth-child(2) {
+        opacity: 0.5;
+      }
+    </style>
+  </head>
+  <body>
+    <div id="mod-container">
+      <a href="enigma.mod">enigma</a>
+    </div>
+    <div id="video-container">
+      <video src="0.webm" autoplay="autoplay" loop="loop"></video>
+      <video src="1.webm" autoplay="autoplay" loop="loop"></video>
+    </div>
+    <script type="text/javascript" src="modfile.js"></script>
+    <script type="text/javascript" src="modplayer.js"></script>
+    <script type="text/javascript" src="sink.js"></script>
+    <script>
+      window.onload = function(ev) {
+        var videos = document.getElementsByTagName("video");
+        for (var i=0; i<videos.length; i++) {
+          var video = videos[i];
+          video.muted = true;
+        }
+      };
+
+      var modPlayerSet = false;
+      var modPlayer = null;
+      var rate = 44100;
+      var loading = false;
+      var sink = null;
+
+      function play_mod(href) {
+        if (loading) {
+          return;
+        }
+        modPlayerSet = false;
+
+        if (sink != null) {
+          sink.kill();
+        }
+
+        sink = Sink(function(buffer, channelCount) {
+          if (modPlayerSet) {
+            written = modPlayer.getSamples(buffer, buffer.length);
+            if (written == 0) {
+              play_mod(random_mod_href());
+              return 0;
+            } else {
+              return written;
+            }
+          }
+        });
+
+        loading = true;
+        fetch = new XMLHttpRequest();
+        fetch.open('GET', href);
+        fetch.overrideMimeType("text/plain; charset=x-user-defined");
+        fetch.onreadystatechange = function() {
+          if (this.readyState == 4 && this.status == 200) {
+            var t = this.responseText || "";
+            var ff = [];
+            var mx = t.length;
+            var scc = String.fromCharCode;
+            for (z = 0; z < mx; z++) {
+              ff[z] = scc(t.charCodeAt(z) & 255);
+            }
+            var binString = ff.join("");
+            var modFile = new ModFile(binString);
+            modPlayer = new ModPlayer(modFile, rate);
+            modPlayerSet = true;
+            loading = false;
+          }
+        }
+        fetch.send();
+      }
+
+      var mod = document.getElementById("mod-container").getElementsByTagName("a")[0];
+      play_mod(mod.href);
+    </script>
+  </body>
+</html>
