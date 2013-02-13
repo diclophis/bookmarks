@@ -17,11 +17,57 @@
         top: 0;
         left: 0;
       }
+
       video:nth-child(1) {
-        opacity: 0.5;
+        border: 10px solid red;
+        animation: blink-1 2.3s infinite;
+        animation-delay: 0.0s;
       }
+
       video:nth-child(2) {
-        opacity: 0.5;
+        border: 8px solid yellow;
+        animation: blink-1 3s infinite;
+        animation-delay: 1.33s;
+      }
+
+      video:nth-child(3) {
+        border: 8px solid green;
+        animation: blink-1 3s infinite;
+        animation-delay: 2.33s;
+      }
+      video:nth-child(4) {
+        border: 8px solid gray;
+        animation: blink-2 30s infinite;
+        animation-delay: 4.33s;
+      }
+
+      @keyframes blink-1 {
+        0% {
+          opacity: 0.0;
+        }
+        50% {
+          opacity: 0.75;
+        }
+        100% {
+          opacity: 0.0;
+        }
+      }
+      @keyframes blink-2 {
+        0% {
+          opacity: 0.0;
+        }
+        33% {
+          opacity: 0.42;
+        }
+        50% {
+          opacity: 0.45;
+        }
+        66% {
+          opacity: 0.25;
+        }
+        100% {
+          opacity: 0.0;
+        }
       }
     </style>
   </head>
@@ -32,6 +78,8 @@
     <div id="video-container">
       <video src="0.webm" autoplay="autoplay" loop="loop"></video>
       <video src="1.webm" autoplay="autoplay" loop="loop"></video>
+      <video src="2.webm" autoplay="autoplay" loop="loop"></video>
+      <video src="3.webm" autoplay="autoplay" loop="loop"></video>
     </div>
     <script type="text/javascript" src="modfile.js"></script>
     <script type="text/javascript" src="modplayer.js"></script>
@@ -99,5 +147,9 @@
       var mod = document.getElementById("mod-container").getElementsByTagName("a")[0];
       play_mod(mod.href);
     </script>
+<!--
+    <iframe width="420" height="315" src="http://www.youtube.com/embed/RzCQ_l_RWTE?html5=1" frameborder="0" allowfullscreen></iframe>
+  <iframe width="420" height="315" src="http://www.youtube.com/embed/StD7eq4lEM0?html5=1" frameborder="0" allowfullscreen></iframe>
+  -->
   </body>
 </html>
