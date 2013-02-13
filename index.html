@@ -1,15 +1,17 @@
 <html>
   <head>
     <style>
+      body {
+        overflow: hidden;
+      }
       #mod-container {
         display: none;
       }
       #video-container {
-        width: 50%;
-        height: 50%;
+        width: 110%;
         position: absolute;
-        top: 0;
-        left: 25%;
+        top: -10%;
+        left: -10%;
       }
       video {
         width: 100%;
@@ -17,31 +19,48 @@
         top: 0;
         left: 0;
       }
-
       video:nth-child(1) {
-        border: 10px solid red;
+        x-border: 10px solid red;
         animation: blink-1 2.3s infinite;
         animation-delay: 0.0s;
+        -webkit-animation: blink-1 2.3s infinite;
+        -webkit-animation-delay: 0.0s;
       }
 
       video:nth-child(2) {
-        border: 8px solid yellow;
+        x-border: 8px solid yellow;
         animation: blink-1 3s infinite;
         animation-delay: 1.33s;
+        -webkit-animation: blink-1 3s infinite;
+        -webkit-animation-delay: 1.33s;
       }
 
       video:nth-child(3) {
-        border: 8px solid green;
+        x-border: 8px solid green;
         animation: blink-1 3s infinite;
         animation-delay: 2.33s;
+        -webkit-animation: blink-1 3s infinite;
+        -webkit-animation-delay: 2.33s;
       }
       video:nth-child(4) {
-        border: 8px solid gray;
+        x-border: 8px solid gray;
         animation: blink-2 30s infinite;
         animation-delay: 4.33s;
+        -webkit-animation: blink-2 30s infinite;
+        -webkit-animation-delay: 4.33s;
       }
-
       @keyframes blink-1 {
+        0% {
+          opacity: 0.0;
+        }
+        50% {
+          opacity: 0.75;
+        }
+        100% {
+          opacity: 0.0;
+        }
+      }
+      @-webkit-keyframes blink-1 {
         0% {
           opacity: 0.0;
         }
@@ -57,10 +76,27 @@
           opacity: 0.0;
         }
         33% {
-          opacity: 0.42;
+          opacity: 0.37;
         }
         50% {
-          opacity: 0.45;
+          opacity: 0.40;
+        }
+        66% {
+          opacity: 0.25;
+        }
+        100% {
+          opacity: 0.0;
+        }
+      }
+      @-webkit-keyframes blink-2 {
+        0% {
+          opacity: 0.0;
+        }
+        33% {
+          opacity: 0.37;
+        }
+        50% {
+          opacity: 0.40;
         }
         66% {
           opacity: 0.25;
@@ -91,6 +127,10 @@
           var video = videos[i];
           video.muted = true;
         }
+        //videos[0].muted = true;
+        //videos[1].muted = true;
+        //videos[2].muted = true;
+        //videos[3].muted = true;
       };
 
       var modPlayerSet = false;
@@ -98,6 +138,8 @@
       var rate = 44100;
       var loading = false;
       var sink = null;
+
+      var mod = document.getElementById("mod-container").getElementsByTagName("a")[0];
 
       function play_mod(href) {
         if (loading) {
@@ -113,7 +155,7 @@
           if (modPlayerSet) {
             written = modPlayer.getSamples(buffer, buffer.length);
             if (written == 0) {
-              play_mod(random_mod_href());
+              play_mod(href);
               return 0;
             } else {
               return written;
@@ -144,12 +186,7 @@
         fetch.send();
       }
 
-      var mod = document.getElementById("mod-container").getElementsByTagName("a")[0];
       play_mod(mod.href);
     </script>
-<!--
-    <iframe width="420" height="315" src="http://www.youtube.com/embed/RzCQ_l_RWTE?html5=1" frameborder="0" allowfullscreen></iframe>
-  <iframe width="420" height="315" src="http://www.youtube.com/embed/StD7eq4lEM0?html5=1" frameborder="0" allowfullscreen></iframe>
-  -->
   </body>
 </html>
