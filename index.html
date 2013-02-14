@@ -20,44 +20,38 @@
         left: 0;
       }
       video:nth-child(1) {
-        x-border: 10px solid red;
-        animation: blink-1 2.3s infinite;
+        animation: blink-1 5s infinite;
         animation-delay: 0.0s;
-        -webkit-animation: blink-1 2.3s infinite;
+        -webkit-animation: blink-1 5s infinite;
         -webkit-animation-delay: 0.0s;
       }
-
       video:nth-child(2) {
-        x-border: 8px solid yellow;
-        animation: blink-1 3s infinite;
+        animation: blink-1 2s infinite;
         animation-delay: 1.33s;
-        -webkit-animation: blink-1 3s infinite;
+        -webkit-animation: blink-1 2s infinite;
         -webkit-animation-delay: 1.33s;
       }
-
       video:nth-child(3) {
-        x-border: 8px solid green;
-        animation: blink-1 3s infinite;
+        animation: blink-1 2.5s infinite;
         animation-delay: 2.33s;
-        -webkit-animation: blink-1 3s infinite;
+        -webkit-animation: blink-1 2.5s infinite;
         -webkit-animation-delay: 2.33s;
       }
       video:nth-child(4) {
-        x-border: 8px solid gray;
         animation: blink-2 30s infinite;
-        animation-delay: 4.33s;
+        animation-delay: 3.33s;
         -webkit-animation: blink-2 30s infinite;
-        -webkit-animation-delay: 4.33s;
+        -webkit-animation-delay: 3.33s;
       }
       @keyframes blink-1 {
         0% {
           opacity: 0.0;
         }
         50% {
-          opacity: 0.75;
+          opacity: 0.7;
         }
         100% {
-          opacity: 0.0;
+          opacity: 0.1;
         }
       }
       @-webkit-keyframes blink-1 {
@@ -65,24 +59,24 @@
           opacity: 0.0;
         }
         50% {
-          opacity: 0.75;
+          opacity: 0.7;
         }
         100% {
-          opacity: 0.0;
+          opacity: 0.1;
         }
       }
       @keyframes blink-2 {
         0% {
-          opacity: 0.0;
+          opacity: 0.1;
         }
         33% {
-          opacity: 0.37;
+          opacity: 0.3;
         }
         50% {
-          opacity: 0.40;
+          opacity: 0.33;
         }
         66% {
-          opacity: 0.25;
+          opacity: 0.1;
         }
         100% {
           opacity: 0.0;
@@ -90,16 +84,16 @@
       }
       @-webkit-keyframes blink-2 {
         0% {
-          opacity: 0.0;
+          opacity: 0.1;
         }
         33% {
-          opacity: 0.37;
+          opacity: 0.3;
         }
         50% {
-          opacity: 0.40;
+          opacity: 0.33;
         }
         66% {
-          opacity: 0.25;
+          opacity: 0.1;
         }
         100% {
           opacity: 0.0;
@@ -112,10 +106,10 @@
       <a href="enigma.mod">enigma</a>
     </div>
     <div id="video-container">
-      <video src="0.webm" autoplay="autoplay" loop="loop"></video>
-      <video src="1.webm" autoplay="autoplay" loop="loop"></video>
-      <video src="2.webm" autoplay="autoplay" loop="loop"></video>
-      <video src="3.webm" autoplay="autoplay" loop="loop"></video>
+      <video src="https://s3.amazonaws.com/risingcode-nyc/0.webm" autoplay="autoplay" loop="loop"></video>
+      <video src="https://s3.amazonaws.com/risingcode-nyc/1.webm" autoplay="autoplay" loop="loop"></video>
+      <video src="https://s3.amazonaws.com/risingcode-nyc/2.webm" autoplay="autoplay" loop="loop"></video>
+      <video src="https://s3.amazonaws.com/risingcode-nyc/3.webm" autoplay="autoplay" loop="loop"></video>
     </div>
     <script type="text/javascript" src="modfile.js"></script>
     <script type="text/javascript" src="modplayer.js"></script>
@@ -127,10 +121,6 @@
           var video = videos[i];
           video.muted = true;
         }
-        //videos[0].muted = true;
-        //videos[1].muted = true;
-        //videos[2].muted = true;
-        //videos[3].muted = true;
       };
 
       var modPlayerSet = false;
